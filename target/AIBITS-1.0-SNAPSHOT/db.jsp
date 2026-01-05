@@ -14,18 +14,18 @@
     <body>
         <<%@ page import="java.sql.*" %>
         <%
-            Connection conn = null;
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                conn = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/aibts",
-                        "root",
-                        "Kavi@2004"
-                );
-            } catch (Exception e) {
-                out.println("DB Error: " + e.getMessage());
-            }
+            String dbHost = System.getenv("DB_HOST");
+            String dbUser = System.getenv("DB_USER");
+            String dbPass = System.getenv("DB_PASS");
+            String dbName = System.getenv("DB_NAME");
+
+            Connection conn = DriverManager.getConnection(
+                    "jdbc:mysql://" + dbHost + "/" + dbName,
+                    dbUser,
+                    dbPass
+            );
         %>
+
 
     </body>
 </html>
